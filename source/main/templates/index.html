@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Space Shop</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">🛸</div>
+      <div class="brand-text">
+        <div class="brand-title">Space Shop</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="card" aria-label="Product">
+      <div class="media">
+        <img class="product-img" id="productImg" src="/styles/ATHACKCTF_LOGO.gif" alt="@hack flag" />
+      </div>
+
+      <div class="info">
+        <div class="row">
+          <h1 class="name">@HACK 2026 Flag</h1>
+          <div class="price">FREE</div>
+        </div>
+
+        <p class="desc">
+          The best collectible in the universe! Show off your hacking pride with the official @HACK 2026 flag.
+        </p>
+
+        <div class="actions">
+          <button class="btn" id="checkBtn" type="button">Check Availability</button>
+        </div>
+
+        <div class="status">
+          Availability: <span class="status-pill neutral" id="pill">Not checked</span>
+          <div class="status-text" id="statusText">Click “Check Availability”.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const img = document.getElementById("productImg");
+    const checkBtn = document.getElementById("checkBtn");
+    const pill = document.getElementById("pill");
+    const statusText = document.getElementById("statusText");
+
+    function setPill(type, text) {
+      pill.className = "status-pill " + type;
+      pill.textContent = text;
+    }
+
+    function syncWidths() {
+      const w = img.getBoundingClientRect().width || 320;
+      checkBtn.style.width = (w * 1.5) + "px";
+    }
+
+    img.addEventListener("load", syncWidths);
+    img.addEventListener("error", () => {
+      console.warn("GIF failed to load:", img.src);
+      syncWidths();
+    });
+
+    window.addEventListener("load", syncWidths);
+    window.addEventListener("resize", syncWidths);
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function checkAvailability() {
+      setPill("neutral", "Checking…");
+      await sleep(500);
+      statusText.textContent = "Please wait...";
+      await sleep(2000);
+      checkBtn.disabled = true;
+
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<availabilityCheck>
+  <item>@hack-flag</item>
+</availabilityCheck>`;
+
+      try {
+        const res = await fetch("/stock", {
+          method: "POST",
+          headers: { "Content-Type": "application/xml" },
+          body: xml,
+          cache: "no-store"
+        });
+
+        const text = (await res.text()).trim();
+        const lower = text.toLowerCase();
+
+        if (lower.includes("in")) {
+          setPill("good", "In stock");
+        } else if (lower.includes("out")) {
+          setPill("bad", "Out of stock");
+        } else {
+          setPill("neutral", "Checked");
+        }
+
+        statusText.textContent = "";
+      } catch (e) {
+        setPill("bad", "Error");
+        statusText.textContent = "Request failed. Please try again.";
+        console.error(e);
+      } finally {
+        checkBtn.disabled = false;
+      }
+    }
+
+    checkBtn.addEventListener("click", checkAvailability);
+  </script>
+</body>
+
+</html>
