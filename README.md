@@ -1,4 +1,4 @@
-# @HACK 2026: Well-Formed
+# @HACK 2026: Entity Crisis
 
 > A deliberately vulnerable web challenge that explores XML parsing vulnerabilities and the risks of enabling certain parser features.
 
