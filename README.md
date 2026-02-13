@@ -61,5 +61,4 @@ The challenge is designed to test the following skills:
 
 > **NOTE:** Online challenges must be containerized for deployment. During early development, focus on correctness first; container hardening can be refined later.
 
-- **[source/main/Dockerfile](source/main/Dockerfile)**: Needed for building a containerized image of the web page.
-- **[source/docker-compose.yml](source/docker-compose.yml)**: Needed for a configuration-free run of the online challenge.
+- **[source/main/Dockerfile](source/Dockerfile)**

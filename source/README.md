@@ -1,7 +1,11 @@
 # Running The Challenge
 
-Navigate to source:
-> cd ./source
+Navigate to source/main:
+> cd ./source./main
 
-Run using docker compose:
-> docker compose up --build
+Build the docker image
+> docker build -t entity-crisis .
+
+
+Run the challenge:
+> docker run --rm -p 8000:8000 entity-crisis
