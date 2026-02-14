@@ -11,7 +11,7 @@ RUN set -eux; \
 RUN set -eux; \
     adduser \
       --disabled-password \
-      --gecos "I do deleted all by browser history but I am not about other histories..." \
+      --gecos "I did delete all my browser history but I am not sure about other histories..." \
       --shell /bin/bash \
       baduser
 

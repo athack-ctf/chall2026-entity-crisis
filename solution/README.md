@@ -33,7 +33,7 @@ list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
 irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
 _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
 nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-baduser:x:1000:1000:I like hiding my stuff if you know what I mean...:/home/baduser:/bin/bash
+baduser:x:1000:1000:I did delete all my browser history but I am not sure about other histories...:/home/baduser:/bin/bash
 ```
 
 This basically tells participants to go check the `.bash_history` file (at the home of `baduser`).
