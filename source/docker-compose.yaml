@@ -1,0 +1,11 @@
+name: chall2026-entity-crisis
+
+services:
+  entity-crisis:
+    image: athack-ctf/chall2026-entity-crisis:latest
+    container_name: chall2026-entity-crisis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2026:8000"

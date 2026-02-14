@@ -8,6 +8,7 @@ app = Flask(
     static_url_path="/styles",
 )
 
+
 def parse_availability_xml(xml_bytes: bytes) -> dict:
     if not isinstance(xml_bytes, (bytes, bytearray)):
         raise TypeError("xml_bytes must be bytes")
@@ -33,9 +34,11 @@ def parse_availability_xml(xml_bytes: bytes) -> dict:
     item = (root.findtext("item") or "").strip()
     return {"root": root.tag, "item": item}
 
+
 @app.get("/")
 def home():
     return render_template("index.html")
+
 
 @app.post("/stock")
 def stock():
@@ -43,7 +46,7 @@ def stock():
     if "xml" not in ct.lower():
         return Response("Expected XML", status=415, mimetype="text/plain")
 
-    xml_body = request.get_data(cache=False) 
+    xml_body = request.get_data(cache=False)
 
     try:
         out = parse_availability_xml(xml_body)
@@ -52,10 +55,11 @@ def stock():
     except Exception as e:
         return Response(f"Server error: {e}", status=500, mimetype="text/plain")
 
-    if(out.get("item") != "@hack-flag"):
+    if (out.get("item") != "@hack-flag"):
         return Response("Invalid item: " + out.get("item"), status=400, mimetype="text/plain")
 
     return Response("IN STOCK: " + str(out), status=200, mimetype="text/plain")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=False)

@@ -8,4 +8,4 @@ Build the docker image
 
 
 Run the challenge:
-> docker run --rm -p 8000:8000 entity-crisis
+> docker run --rm -p 2026:8000 entity-crisis
