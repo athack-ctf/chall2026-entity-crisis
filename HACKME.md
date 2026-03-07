@@ -3,3 +3,5 @@ There's only one item: **The Flag**, and only one thing you can do: **Check Avai
 Can you get the flag even tho the page only lets you check if its available?
 
 > Hint: The shop is *too trusting* about the data it receives.
+
+
