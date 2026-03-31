@@ -6,6 +6,6 @@ services:
     container_name: chall2026-entity-crisis
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: source/Dockerfile
     ports:
-      - "2026:8000"
+      - "53006:8000"

@@ -1,64 +1,82 @@
-# @HACK 2026: Entity Crisis
+# @Hack 2026: Entity Crisis
 
-> A deliberately vulnerable web challenge that explores XML parsing vulnerabilities and the risks of enabling certain parser features.
+> Authored by [Tarek](https://github.com/tarek503).
 
-## Challenge Type
+- **Category**: `Web`
+- **Solves**: `49/120`
+- **Tags**: `beginner`
+- **Protocol**: `http`
 
-- [ ] **OFF**line
-- [X] **ON**line
+> At @HACK 2026, there is a **Space Shop**, it is the home of the rarest collectible in the galaxy: the **@HACK Flag**.
+>
+> There's only one item: **The Flag**, and only one thing you can do: **Check Availability**.
+>
+> Can you get the flag even tho the page only lets you check if its available?
+>
+> > Hint: The shop is *too trusting* about the data it receives.
+>
 
-## Design Type
+## Access a dockerized instance
 
-- [X] **Black**-Box
-- [ ] **White**-Box
+Run challenge container using docker compose
 
-## Designer(s)
+```
+docker compose up -d
+```
 
-- Tarek Hamze
+Open below URL on your browser
 
-## Description
+```
+http://localhost:53006/
+```
 
-This challenge is built around a real world vulnerability: applications that accept **XML input** and process it with a parser configured to support advanced features (e.g., DTD handling and entity expansion). When an application treats XML as “just data” and doesn’t carefully constrain what the parser is allowed to resolve, user input may trigger **local resource access** such as performing an XXE injection attack that retrieves an arbitrary file from the server's filesystem.
+<details>
+<summary>
+How to stop/restart challenge?
+</summary>
 
-Participants interact with a simple space shop web app that performs “availability/stock checks” by sending XML to a backend endpoint. The challenge tests whether participants can leverage the XML processing surface accordingly. In other words, perform an XXE injection attack to retrieve etc/passwd that contains the flag. Some guessing is involved, players have to guess that etc/passwd is the file they should access.
+To stop the challenge run
 
-### Educational goals
+```
+docker compose stop
+```
 
-The challenge is designed to test the following skills:
+To restart the challenge run
 
-- Understanding of **XML structure** (elements, attributes)
-- Awareness of **parser configuration** and why defaults/features matter
-- Practical traffic inspection and manipulation using **Burp Suite / Repeater** (or curl)
+```
+docker compose restart
+```
 
-**IMPORTANT:** This description will **NOT** be shared with participants.
+</details>
 
-## Category(ies)
+## Reveal Flag(s)
 
-- `web`
+Did you try solving this challenge?
+<details>
+<summary>
+Yes
+</summary>
+
+Did you **REALLY** try solving this challenge?
+
+<details>
+<summary>
+Yes, I promise!
+</summary>
+
+- Flag 1: `ATHACKCTF{D1sAbL3_xML_pArS3rS_D4nG3r0uS_F34tUr3S}`
+
+</details>
+</details>
+
 
 ---
 
-# Project Structure
+## About @Hack
 
-## 1. HACKME.md
+[@Hack](https://athackctf.com/) is an annual CTF (Capture The Flag) competition hosted
+by [HEXPLOIT ALLIANCE](https://hexploit-alliance.com/) and [TECHNATION](https://technationcanada.ca/) at Concordia
+University in Montreal, Canada.
 
-- **[HACKME.md](HACKME.md)**: A description of the challenge to be shared in CTFd.
-
-## 2. Source Code
-
-- **[source/README.md](source/README.md)**: Instructions for running the challenge locally from source.
-- **[source/*](source/)**: Your source code.
-
-## 3. Offline Artifacts [OPTIONAL]
-
-## 4. Solution
-
-- **[solution/README.md](solution/README.md)**: A detailed writeup of the working solution.
-- **[solution/FLAGS.md](solution/FLAGS.md)**: A single markdown file listing all (up-to-date) flags.
-- **[solution/*](solution/)**: Any additional files or code necessary for constructing a reproducible solution for the challenge.
-
-## 5. Dockerization
-
-> **NOTE:** Online challenges must be containerized for deployment. During early development, focus on correctness first; container hardening can be refined later.
-
-- **[source/main/Dockerfile](source/Dockerfile)**
+---
+[Check more challenges from @Hack 2026](https://github.com/athack-ctf/AtHackCTF-2026-Challenges).
