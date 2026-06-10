@@ -5,7 +5,7 @@ services:
     image: athack-ctf/chall2026-entity-crisis:latest
     container_name: chall2026-entity-crisis
     build:
-      context: .
-      dockerfile: source/Dockerfile
+      context: ./source
+      dockerfile: Dockerfile
     ports:
       - "53006:8000"
